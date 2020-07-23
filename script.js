@@ -30,11 +30,11 @@ function getChoices() {
   return choices
 }
 
-function select(length, type, guarantee) {
+function select(length, type, applied) {
   let pw = []
   
   // run the inputed number of times
-  for (let i = 0; i < (length - guarantee.length); i++) {
+  for (let i = 0; i < (length - applied.length); i++) {
     let typeNum = Math.floor(Math.random() * type.length)
     
     // select the character from its respective array (lowercase, uppercase, numeric or special)
@@ -56,7 +56,7 @@ function select(length, type, guarantee) {
     // push selected character onto array
     pw.push(charSelect)
   }
-  pw = pw.concat(guarantee)
+  pw = pw.concat(applied)
   return pw
 }
 
@@ -97,32 +97,32 @@ function generatePassword() {
   // create character type array
   let charType = []
 
-  // guaranteed array 
-  let guaranteed = []
+  // apply all types that were selected array 
+  let typesSelected = []
   
   if (choices[0] === true) {
     charType.push(alpha)
-    guaranteed.push(alpha[Math.floor(Math.random() * alpha.length)])
+    typesSelected.push(alpha[Math.floor(Math.random() * alpha.length)])
   }
 
   if (choices[1] === true) {
     let upper = toUpper(alpha)
     charType.push(upper)
-    guaranteed.push(upper[Math.floor(Math.random() * upper.length)])
+    typesSelected.push(upper[Math.floor(Math.random() * upper.length)])
   }
 
   if (choices[2] === true) {
     charType.push(num)
-    guaranteed.push(num[Math.floor(Math.random() * num.length)])
+    typesSelected.push(num[Math.floor(Math.random() * num.length)])
   }
 
   if (choices[3] === true) {
     charType.push(special)
-    guaranteed.push(special[Math.floor(Math.random() * special.length)])
+    typesSelected.push(special[Math.floor(Math.random() * special.length)])
   }
 
   // select a character randomly
-  let result = select(charLength, charType, guaranteed)
+  let result = select(charLength, charType, typesSelected)
 
   // make pw array to string and return result
   let pw = result.join('')
