@@ -30,10 +30,11 @@ function getChoices() {
   return choices
 }
 
-function select(length, type) {
+function select(length, type, guarantee) {
   let pw = []
+  
   // run the inputed number of times
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < (length - guarantee.length); i++) {
     let typeNum = Math.floor(Math.random() * type.length)
     
     // select the character from its respective array (lowercase, uppercase, numeric or special)
@@ -55,7 +56,7 @@ function select(length, type) {
     // push selected character onto array
     pw.push(charSelect)
   }
-
+  pw = pw.concat(guarantee)
   return pw
 }
 
@@ -95,25 +96,35 @@ function generatePassword() {
 
   // create character type array
   let charType = []
+
+  // guaranteed array 
+  let guaranteed = []
   
   if (choices[0] === true) {
     charType.push(alpha)
+    guaranteed.push(alpha[Math.floor(Math.random() * alpha.length)])
   }
 
   if (choices[1] === true) {
-    charType.push(toUpper(alpha))
+    let upper = toUpper(alpha)
+    charType.push(upper)
+    guaranteed.push(upper[Math.floor(Math.random() * upper.length)])
   }
 
   if (choices[2] === true) {
     charType.push(num)
+    guaranteed.push(num[Math.floor(Math.random() * num.length)])
   }
 
   if (choices[3] === true) {
     charType.push(special)
+    guaranteed.push(special[Math.floor(Math.random() * special.length)])
   }
 
+  console.log(guaranteed)
+
   // select a character randomly
-  let result = select(charLength, charType)
+  let result = select(charLength, charType, guaranteed)
 
   // make pw array to string and return result
   let pw = result.join('')
