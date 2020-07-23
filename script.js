@@ -11,8 +11,19 @@ const special = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')',
                 '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{',
                 '|', '}', '~']
 
+function getChoices() {
+  let choices = []
+  choices.push(confirm('Do you want lowercase letters to be included?'))
+  choices.push(confirm('Do you want uppercase letters to be included?'))
+  choices.push(confirm('Do you want numerics to be included?'))
+  choices.push(confirm('Do you want special characters to be included?'))
+
+  return choices
+}
+
 function generatePassword() {
-  // use prompt() and confirm() to interact with user
+  
+  let password = []
 
   // prompt user for character length
   let charLength = parseInt(prompt('How long do you want the password to be? ( more than 8 or less than 128 characters)'))
@@ -22,9 +33,30 @@ function generatePassword() {
     while (charLength < 8 || charLength > 128) {
       charLength = parseInt(prompt('Please input a number greater than 8 or less than 128'))
     }
-  } else {
+  }
+
+  // array for character types (at least one should be TRUE)
+  // choices[lowercase, uppercase, numeric, special]
+  let choices = getChoices()
+
+  // check if all choices are 'NO'
+  if (choices.indexOf(true) === -1) {
+
+    // if there aren't any 'yes' keep checking
+    while (choices.indexOf(true) === -1) {
+      choices = getChoices()
+    } 
+  }
+
+  // run (length) times. char = [rand1][rand2]
+  // rand1 = random number index of 0-3 for numeric, special, and all letters
+  // rand2 = random number index of 0-array.length for exact character
+
+  for (let i = 0; i < charLength; i++) {
     
   }
+
+
 }
 
 // Write password to the #password input
