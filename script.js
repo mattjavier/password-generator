@@ -35,7 +35,17 @@ function generatePassword() {
   let pw = []
 
   // prompt user for character length
-  let charLength = parseInt(prompt('How long do you want the password to be? ( more than 8 or less than 128 characters)'))
+  let c = prompt('How long do you want the password to be? ( more than 8 or less than 128 characters)')
+
+  // check if c is valid
+  if (c === null) {
+    while (c === null) {
+      c = prompt('How long do you want the password to be? ( more than 8 or less than 128 characters)')
+    }
+  }
+
+  let charLength = parseInt(c)
+  console.log(charLength)
 
   // check if charLength is falls between 8 and 128 characters
   if (charLength < 8 || charLength > 128) {
