@@ -10,7 +10,7 @@ Dialogue boxes appear prompting the user for input. If it requires text, the use
 
 * If the user puts less than 8 characters or more than 128 characters for the password length, the user will be prompted continuously until they put a valid number for length.
 
-* If the user refuses to put a password length, they will continuously prompted to do so.
+* If the user refuses to put a password length, they will continuously be prompted to do so.
 
 * To ensure the password has at least one constraint, the user will be prompted again if they chose not to select any character constraints until at least one is selected.
 
