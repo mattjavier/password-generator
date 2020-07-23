@@ -121,8 +121,6 @@ function generatePassword() {
     guaranteed.push(special[Math.floor(Math.random() * special.length)])
   }
 
-  console.log(guaranteed)
-
   // select a character randomly
   let result = select(charLength, charType, guaranteed)
 
