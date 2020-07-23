@@ -30,9 +30,36 @@ function getChoices() {
   return choices
 }
 
-function generatePassword() {
-  
+function select(length, type) {
   let pw = []
+  // run the inputed number of times
+  for (let i = 0; i < length; i++) {
+    let typeNum = Math.floor(Math.random() * type.length)
+    
+    // select the character from its respective array (lowercase, uppercase, numeric or special)
+    let charSelect 
+    switch (typeNum) {
+      case 0:
+        charSelect = type[0][Math.floor(Math.random() * type[0].length)]
+        break
+      case 1:
+        charSelect = type[1][Math.floor(Math.random() * type[1].length)]
+        break
+      case 2:
+        charSelect = type[2][Math.floor(Math.random() * type[2].length)]
+        break
+      default:
+        charSelect = type[3][Math.floor(Math.random() * type[3].length)]
+    }
+
+    // push selected character onto array
+    pw.push(charSelect)
+  }
+
+  return pw
+}
+
+function generatePassword() {
 
   // prompt user for character length
   let c = prompt('How long do you want the password to be? ( more than 8 or less than 128 characters)')
@@ -45,7 +72,6 @@ function generatePassword() {
   }
 
   let charLength = parseInt(c)
-  console.log(charLength)
 
   // check if charLength is falls between 8 and 128 characters
   if (charLength < 8 || charLength > 128) {
@@ -85,34 +111,13 @@ function generatePassword() {
   if (choices[3] === true) {
     charType.push(special)
   }
-  
-  // run charLength times
-  for (let i = 0; i < charLength; i++) {
-    let typeNum = Math.floor(Math.random() * charType.length)
-    
-    // select the character from its respective array (lowercase, uppercase, numeric or special)
-    let charSelect 
-    switch (typeNum) {
-      case 0:
-        charSelect = charType[0][Math.floor(Math.random() * charType[0].length)]
-        break
-      case 1:
-        charSelect = charType[1][Math.floor(Math.random() * charType[1].length)]
-        break
-      case 2:
-        charSelect = charType[2][Math.floor(Math.random() * charType[2].length)]
-        break
-      default:
-        charSelect = charType[3][Math.floor(Math.random() * charType[3].length)]
-    }
-    
-    // push character to the end of pw array
-    pw.push(charSelect)
-  }
+
+  // select a character randomly
+  let result = select(charLength, charType)
 
   // make pw array to string and return result
-  let result = pw.join('')
-  return result
+  let pw = result.join('')
+  return pw
 }
 
 // Write password to the #password input

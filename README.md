@@ -1,3 +1,9 @@
 # Password Generator
 
-Create an application that generates a random password based on user-selected criteria. This app will run in the browser and feature dynamically updated HTML and CSS powered by your JavaScript code. It will also feature a clean and polished user interface and be responsive, ensuring that it adapts to multiple screen sizes.
+A program that takes in user input to generate a password with constraints.
+The process includes:
+
+* Asking the user for a number of characters the password can be (no less than 8 and no more than 128)
+* Asking the user what kind of characters to include (lowercase or uppercase letters, numerics or special characters)
+
+The program then generates a password of the specified length and consists of all type of characters the user decided to include.
