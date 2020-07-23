@@ -11,6 +11,15 @@ const special = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')',
                 '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{',
                 '|', '}', '~']
 
+function toUpper(x) {
+  let upper = []
+  for (let i = 0; i < x.length; i++) {
+    upper.push(x[i].toUpperCase())
+  }
+
+  return upper
+}
+
 function getChoices() {
   let choices = []
   choices.push(confirm('Do you want lowercase letters to be included?'))
@@ -23,7 +32,7 @@ function getChoices() {
 
 function generatePassword() {
   
-  let password = []
+  let pw = []
 
   // prompt user for character length
   let charLength = parseInt(prompt('How long do you want the password to be? ( more than 8 or less than 128 characters)'))
@@ -48,15 +57,52 @@ function generatePassword() {
     } 
   }
 
-  // run (length) times. char = [rand1][rand2]
-  // rand1 = random number index of 0-3 for numeric, special, and all letters
-  // rand2 = random number index of 0-array.length for exact character
-
-  for (let i = 0; i < charLength; i++) {
-    
+  // create character type array
+  let charType = []
+  
+  if (choices[0] === true) {
+    charType.push(alpha)
   }
 
+  if (choices[1] === true) {
+    charType.push(toUpper(alpha))
+  }
 
+  if (choices[2] === true) {
+    charType.push(num)
+  }
+
+  if (choices[3] === true) {
+    charType.push(special)
+  }
+  
+  // run charLength times
+  for (let i = 0; i < charLength; i++) {
+    let typeNum = Math.floor(Math.random() * charType.length)
+    
+    // select the character from its respective array (lowercase, uppercase, numeric or special)
+    let charSelect 
+    switch (typeNum) {
+      case 0:
+        charSelect = charType[0][Math.floor(Math.random() * charType[0].length)]
+        break
+      case 1:
+        charSelect = charType[1][Math.floor(Math.random() * charType[1].length)]
+        break
+      case 2:
+        charSelect = charType[2][Math.floor(Math.random() * charType[2].length)]
+        break
+      default:
+        charSelect = charType[3][Math.floor(Math.random() * charType[3].length)]
+    }
+    
+    // push character to the end of pw array
+    pw.push(charSelect)
+  }
+
+  // make pw array to string and return result
+  let result = pw.join('')
+  return result
 }
 
 // Write password to the #password input
